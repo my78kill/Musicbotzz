@@ -1,4 +1,5 @@
 from pyrogram import filters
+from pytgcalls.types.input_stream import AudioPiped
 from bot.core.call import bot, call
 from bot.core.queue import pop
 
@@ -9,7 +10,13 @@ async def skip(_, message):
 
     if next_song:
         url, title = next_song
-        await call.change_stream(chat_id, url)
+
+        # ✅ FIX: AudioPiped use karo
+        await call.change_stream(
+            chat_id,
+            AudioPiped(url)
+        )
+
         await message.reply(f"⏭ Playing: {title}")
     else:
         await call.leave_group_call(chat_id)
