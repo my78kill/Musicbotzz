@@ -15,8 +15,12 @@ async def play(_, message):
     chat_id = message.chat.id
     queue = get(chat_id)
 
+    # 👉 YAHI PE USE HOGA
     if not queue:
-        await call.join_group_call(chat_id, AudioPiped(url))
+        await call.join_group_call(
+            chat_id,
+            AudioPiped(url)   # 🔥 ye wahi line hai
+        )
         await message.reply(f"▶️ Playing: {title}")
     else:
         add(chat_id, (url, title))
